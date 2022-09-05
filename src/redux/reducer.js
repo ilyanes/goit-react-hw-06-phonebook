@@ -9,15 +9,8 @@ const initialContacts = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-function getNewContact(state, { payload }) {
-  const existContact = state.some(({ name }) => name === payload.name);
-  return !existContact
-    ? [...state, payload]
-    : alert(`${payload.name} is already in the contact`);
-}
-
 const items = createReducer(initialContacts, {
-  [addContact]: (state, action) => getNewContact(state, action),
+  [addContact]: (state, { payload }) => [payload, ...state],
   [deleteContact]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
 });

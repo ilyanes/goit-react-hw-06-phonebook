@@ -10,7 +10,7 @@ export const App = () => {
       style={{
         // height: '100vh',
         // display: 'flex',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
         fontSize: 20,
       }}
