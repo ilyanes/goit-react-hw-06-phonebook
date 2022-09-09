@@ -28,8 +28,13 @@ export default function Form({ onSubmit }) {
     state.contacts.items.some(contact => contact.name === name)
   );
 
-  console.log('contact', contactName);
-  // console.log(name);
+  // console.log('contact', contactName);
+
+  const newContact = {
+    id: shortid.generate(),
+    name: name,
+    number: number,
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -37,7 +42,7 @@ export default function Form({ onSubmit }) {
       alert(`${name} is already in the contact`);
       reset();
     } else {
-      dispatch(addContact(name, formatPhoneNumber(number)));
+      dispatch(addContact(newContact));
       reset();
     }
   };
@@ -45,14 +50,6 @@ export default function Form({ onSubmit }) {
   const reset = () => {
     setName('');
     setNumber('');
-  };
-
-  const formatPhoneNumber = number => {
-    let cleaned = ('' + number).replace(/\D/g, '');
-
-    let match = cleaned.match(/^(\d{3})(\d{2})(\d{2})$/);
-
-    return match ? +match[1] + '-' + match[2] + '-' + match[3] : number;
   };
 
   const nameInputId = shortid.generate();
